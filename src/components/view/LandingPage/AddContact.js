@@ -79,6 +79,7 @@ const AddContact = () => {
         <div>
           <label>First Name</label>
           <input
+            required
             onChange={e => handleChange(e)}
             type="text"
             name="first_name"
@@ -89,6 +90,7 @@ const AddContact = () => {
         <div>
           <label>Last Name</label>
           <input
+            required
             onChange={e => handleChange(e)}
             type="text"
             name="last_name"
@@ -99,6 +101,7 @@ const AddContact = () => {
         <div>
           <label>Primay Email</label>
           <input
+            required
             onChange={e => handleChange(e)}
             type="text"
             name="Primay_email"

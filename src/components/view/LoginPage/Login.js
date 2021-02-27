@@ -3,7 +3,7 @@ import React, { useState, useRef } from 'react';
 import { Form, Button, Jumbotron, Alert } from 'react-bootstrap';
 
 import { useDispatch } from 'react-redux';
-import { loginUser } from '../../../_actions/user_actions';
+import { loginUser } from '../../../redux/_actions/user_actions';
 
 const Login = ({ setAccessToken }) => {
   const dispatch = useDispatch();
@@ -20,7 +20,6 @@ const Login = ({ setAccessToken }) => {
     loginUserData.append('password', passwordRef.current.value);
     dispatch(loginUser(loginUserData))
       .then(response => {
-        console.log(response.payload);
         if (response.payload.data.access_token) {
           console.log('successfully login');
           console.log(response.payload.data.access_token);

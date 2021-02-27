@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Navbar, Nav, FormControl, Button } from 'react-bootstrap';
-import { USER_SERVER } from '../../config';
-import { useSelector, useDispatch } from 'react-redux';
-import { getUserData } from '../../../_reducers/user_reducer';
-import { logoutUser } from '../../../_actions/user_actions';
+import { Navbar, Nav } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { logoutUser } from '../../../redux/_actions/user_actions';
 
 const NavBar = () => {
   const IsLoggedin = sessionStorage.getItem('ACCESS_TOKEN');
@@ -48,7 +46,7 @@ const NavBar = () => {
   };
 
   return (
-    <Navbar bg="dark" variant="dark">
+    <Navbar bg="dark" variant="dark" className="nav-width">
       <Navbar.Brand href="#home">CanStartCo</Navbar.Brand>
       <Nav className="mr-auto">
         {logintoggle ? (
