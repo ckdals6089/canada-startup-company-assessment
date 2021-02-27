@@ -70,7 +70,7 @@ const AddContact = () => {
     console.log(createContactItem);
     dispatch(createContact(createContactItem));
     e.preventDefault();
-    window.alert('The contact is added to the store successfully!!📗');
+    window.alert('The contact is added to the store successfully!!');
   };
   return (
     <div className="form">

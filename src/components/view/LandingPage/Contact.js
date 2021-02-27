@@ -26,7 +26,6 @@ const Contact = ({ contact }) => {
   } = contact;
   const dispatch = useDispatch();
   const handleDeleteContact = id => {
-    console.log(id);
     dispatch(deleteContact(id));
   };
   const [isModalOpen, setIsModalOpen] = useState(false);

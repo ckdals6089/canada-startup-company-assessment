@@ -35,7 +35,7 @@ const UpdateContact = ({ contactData }) => {
     createContactItem.append('lanugage', lanugage);
     dispatch(updateContact(updateContactForm));
     e.preventDefault();
-    window.alert('The contact is updated to the store successfully!!📗');
+    window.alert('The contact is updated to the store successfully!!');
   };
   const {
     id,

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Contact from './Contact';
 import AddContact from './AddContact';
+import { useSelector } from 'react-redux';
 
 import { useDispatch } from 'react-redux';
 import { readAllContact } from '../../../redux/_actions/contact_action';
@@ -8,25 +9,16 @@ import { Button, Table } from 'react-bootstrap';
 import Modal from 'react-modal';
 
 const Landing = ({ accessToken }) => {
-  const [contactList, setContactList] = useState([]);
+  const contactList = useSelector(state => state.contactReducer.contacts);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
   const modalToggle = () => {
     setIsModalOpen(!isModalOpen);
   };
-
   useEffect(() => {
-    dispatch(readAllContact(accessToken))
-      .then(response => {
-        if (response.payload.data) {
-          setContactList(response.payload.data);
-        }
-      })
-      .catch(error => {
-        console.log(error);
-      });
-  }, [accessToken]);
-  console.log(contactList);
+    dispatch(readAllContact(accessToken));
+  }, []);
+
   return (
     <div>
       <div className="contact-header">

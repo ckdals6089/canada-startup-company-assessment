@@ -18,22 +18,6 @@ const NavBar = () => {
   const logoutHandler = () => {
     dispatch(logoutUser(IsLoggedin))
       .then(response => {
-        console.log(response);
-      })
-      // fetch(`${USER_SERVER}/logout`, {
-      //   method: 'POST',
-      //   mode: 'cors',
-      //   headers: {
-      //     'Access-Control-Allow-Origin': '*',
-      //     'Content-Type': 'application/json',
-      //     'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, DELETE, PUT',
-      //     'Access-Control-Allow-Headers':
-      //       'append,delete,entries,foreach,get,has,keys,set,values,Authorization',
-      //     Authorization: `Bearer ${IsLoggedin}`,
-      //   },
-      // })
-      .then(response => {
-        console.log(response);
         if (response.status === 200) {
           alert('Log Out Success');
         } else {
