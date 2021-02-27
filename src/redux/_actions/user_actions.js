@@ -1,8 +1,7 @@
-import { LOGIN_USER, LOGOUT_USER, IS_LOGIN } from './types';
-import { USER_SERVER } from '../../components/config.js';
+import { LOGIN_USER, LOGOUT_USER } from './types';
 
 export async function loginUser(dataToSubmit) {
-  const request = await fetch(`${USER_SERVER}/login`, {
+  const request = await fetch(`users/login`, {
     method: 'POST',
     body: dataToSubmit,
   });
@@ -12,12 +11,13 @@ export async function loginUser(dataToSubmit) {
   };
 }
 
-export async function logoutUser(token) {
-  const request = await fetch(`${USER_SERVER}/logout`, {
+export async function logoutUser() {
+  const token = sessionStorage.getItem('ACCESS_TOKEN');
+  const accessToken = 'Bearer ' + token.replace(/"/g, '');
+  const request = await fetch(`users/logout`, {
     method: 'POST',
-    mode: 'cors',
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: accessToken,
     },
   });
 

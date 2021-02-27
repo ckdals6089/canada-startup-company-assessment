@@ -8,7 +8,7 @@ import {
 export async function createContact(dataToSubmit) {
   const token = sessionStorage.getItem('ACCESS_TOKEN');
   const accessToken = 'Bearer ' + token.replace(/"/g, '');
-  const request = await fetch(`/contacts/create`, {
+  const response = await fetch(`/contacts/create`, {
     method: 'POST',
     headers: {
       Authorization: accessToken,
@@ -17,7 +17,7 @@ export async function createContact(dataToSubmit) {
   });
   return {
     type: CREATE_CONTACT,
-    payload: request,
+    payload: response,
   };
 }
 
@@ -25,7 +25,7 @@ export async function updateContact(dataToSubmit) {
   console.log(dataToSubmit);
   const token = sessionStorage.getItem('ACCESS_TOKEN');
   const accessToken = 'Bearer ' + token.replace(/"/g, '');
-  const request = await fetch(`/contacts/update`, {
+  const response = await fetch(`/contacts/update`, {
     method: 'POST',
     headers: {
       Authorization: accessToken,
@@ -41,21 +41,21 @@ export async function updateContact(dataToSubmit) {
 export async function deleteContact(id) {
   const token = sessionStorage.getItem('ACCESS_TOKEN');
   const accessToken = 'Bearer ' + token.replace(/"/g, '');
-  const request = await fetch(`/contacts/delete/${id}`, {
-    method: 'POST',
+  const response = await fetch(`/contacts/delete/${id}`, {
+    method: 'GET',
     headers: {
       Authorization: accessToken,
     },
   });
   return {
     type: DELETE_CONTACT,
-    payload: request,
+    payload: response,
   };
 }
 
 export async function readAllContact(token) {
   const accessToken = 'Bearer ' + token.replace(/"/g, '');
-  const request = await fetch(`/contacts/read-all`, {
+  const response = await fetch(`/contacts/read-all`, {
     method: 'GET',
     headers: {
       Authorization: accessToken,
@@ -63,6 +63,6 @@ export async function readAllContact(token) {
   });
   return {
     type: READ_ALLCONTACT,
-    payload: request.json(),
+    payload: response.json(),
   };
 }

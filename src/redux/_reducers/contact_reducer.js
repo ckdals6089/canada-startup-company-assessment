@@ -5,7 +5,7 @@ import {
   READ_ALLCONTACT,
 } from '../_actions/types';
 const initialContacts = {
-  contact: '',
+  contacts: [],
 };
 
 export default function contactReducer(state = initialContacts, action) {
@@ -13,29 +13,30 @@ export default function contactReducer(state = initialContacts, action) {
     case CREATE_CONTACT:
       return {
         ...state,
-        contact: [action.payload, ...state.contact],
+        contacts: [action.payload, ...state.contacts],
       };
     case DELETE_CONTACT:
       return {
         ...state,
-        contact: state.contact.filter(
-          contactData => contactData.id != action.payload
+        contacts: state.contacts.filter(
+          contactData => contactData.id != action.payload.id
         ),
       };
     case UPDATE_CONTACT:
       return {
         ...state,
-        contact: state.contact.map(contactData => {
-          if (contactData.data.id == action.payload.id) {
+        contacts: state.contacts.map(contactData => {
+          if (contactData.id === action.payload.id) {
             return action.payload;
           }
           return contactData;
         }),
       };
     case READ_ALLCONTACT:
+      const newContacts = action.payload.data;
       return {
         ...state,
-        contact: [action.payload, ...state.contact],
+        contacts: [...newContacts, ...state.contacts],
       };
     default:
       return state;
