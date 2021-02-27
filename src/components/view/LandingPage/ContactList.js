@@ -1,21 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import Contact from './Contact';
-import { useDispatch, useSelector } from 'react-redux';
+import AddContact from './AddContact';
+
+import { useDispatch } from 'react-redux';
 import { readAllContact } from '../../../redux/_actions/contact_action';
 import { Button, Table } from 'react-bootstrap';
+import Modal from 'react-modal';
 
 const Landing = ({ accessToken }) => {
   const [contactList, setContactList] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const dispatch = useDispatch();
+  const modalToggle = () => {
+    setIsModalOpen(!isModalOpen);
+  };
 
-  useEffect(async () => {
+  useEffect(() => {
     dispatch(readAllContact(accessToken))
       .then(response => {
         if (response.payload.data) {
           setContactList(response.payload.data);
         }
-        console.log(response.payload);
-        console.log(contactList);
       })
       .catch(error => {
         console.log(error);
@@ -25,9 +30,24 @@ const Landing = ({ accessToken }) => {
     <div>
       <div className="contact-header">
         <h2 className="contactlist-h2">Contact List</h2>
-        <Button variant="dark">Add Contact</Button>
+        <Button onClick={modalToggle} variant="dark">
+          Add Contact
+        </Button>
+        <Modal className="content" ariaHideApp={false} isOpen={isModalOpen}>
+          <Button variant="danger" onClick={modalToggle} className="modal-btn">
+            X
+          </Button>
+          <AddContact />
+        </Modal>
       </div>
-      <Table striped bordered hover variant="dark" className="table-width">
+      <Table
+        responsive
+        striped
+        bordered
+        hover
+        variant="dark"
+        className="table-width"
+      >
         <thead>
           <tr>
             <th>#</th>

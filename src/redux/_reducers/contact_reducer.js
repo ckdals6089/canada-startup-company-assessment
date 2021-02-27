@@ -7,11 +7,13 @@ import {
 const initialContacts = {
   contact: '',
 };
-console.log(initialContacts.contact);
 export default function contactReducer(state = {}, action) {
   switch (action.type) {
     case CREATE_CONTACT:
-      return { ...state, contact: [action.payload, ...state.contact] };
+      return {
+        ...state,
+        contact: action.payload,
+      };
     case DELETE_CONTACT:
       return {
         ...state,

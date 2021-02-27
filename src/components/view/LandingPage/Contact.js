@@ -21,7 +21,6 @@ const Contact = ({ contact }) => {
     twitter_usernamem,
     lanugage,
   } = contact;
-  console.log(contact);
   return (
     <tbody>
       <tr>
