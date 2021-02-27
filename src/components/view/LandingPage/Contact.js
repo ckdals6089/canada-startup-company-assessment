@@ -1,6 +1,9 @@
-import React, { useEffect } from 'react';
-import { Table } from 'react-bootstrap';
-
+import React, { useState } from 'react';
+import UpdateContact from './UpdateContact';
+import Modal from 'react-modal';
+import { Button } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { deleteContact } from '../../../redux/_actions/contact_action';
 const Contact = ({ contact }) => {
   const {
     id,
@@ -21,9 +24,24 @@ const Contact = ({ contact }) => {
     twitter_usernamem,
     lanugage,
   } = contact;
+  const dispatch = useDispatch();
+  const handleDeleteContact = id => {
+    console.log(id);
+    dispatch(deleteContact(id));
+  };
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const modalToggle = () => {
+    setIsModalOpen(!isModalOpen);
+  };
   return (
     <tbody>
       <tr>
+        <Modal className="content" ariaHideApp={false} isOpen={isModalOpen}>
+          <Button variant="danger" onClick={modalToggle} className="modal-btn">
+            X
+          </Button>
+          <UpdateContact key={id} contactData={contact} />
+        </Modal>
         <td>{id}</td>
         <td>{first_name}</td>
         <td>{last_name}</td>
@@ -39,8 +57,17 @@ const Contact = ({ contact }) => {
         <td>{sla_name}</td>
         <td>{twitter_usernamem}</td>
         <td>{address_details}</td>
-        <td>{profile_picture}</td>
         <td>{lanugage}</td>
+        <td>
+          <Button variant="danger" onClick={() => handleDeleteContact(id)}>
+            Delete
+          </Button>
+        </td>
+        <td>
+          <Button onClick={modalToggle} variant="dark">
+            Update
+          </Button>
+        </td>
       </tr>
     </tbody>
   );

@@ -26,6 +26,7 @@ const Landing = ({ accessToken }) => {
         console.log(error);
       });
   }, [accessToken]);
+  console.log(contactList);
   return (
     <div>
       <div className="contact-header">
@@ -65,7 +66,6 @@ const Landing = ({ accessToken }) => {
             <th>SLA</th>
             <th>Twitter</th>
             <th>Address</th>
-            <th>Profile</th>
             <th>Lanugage</th>
           </tr>
         </thead>

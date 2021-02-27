@@ -7,12 +7,13 @@ import {
 const initialContacts = {
   contact: '',
 };
-export default function contactReducer(state = {}, action) {
+
+export default function contactReducer(state = initialContacts, action) {
   switch (action.type) {
     case CREATE_CONTACT:
       return {
         ...state,
-        contact: action.payload,
+        contact: [action.payload, ...state.contact],
       };
     case DELETE_CONTACT:
       return {
@@ -25,7 +26,7 @@ export default function contactReducer(state = {}, action) {
       return {
         ...state,
         contact: state.contact.map(contactData => {
-          if (contactData.id === action.payload.id) {
+          if (contactData.data.id == action.payload.id) {
             return action.payload;
           }
           return contactData;
@@ -34,6 +35,7 @@ export default function contactReducer(state = {}, action) {
     case READ_ALLCONTACT:
       return {
         ...state,
+        contact: [action.payload, ...state.contact],
       };
     default:
       return state;
@@ -43,11 +45,5 @@ export default function contactReducer(state = {}, action) {
 export const getUserData = (state = {}) => {
   return {
     ...state.user.loginSucess,
-  };
-};
-
-export const getContactData = (state = initialContacts) => {
-  return {
-    ...state.contact,
   };
 };
