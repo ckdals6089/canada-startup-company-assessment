@@ -4,12 +4,11 @@ import {
   DELETE_CONTACT,
   READ_ALLCONTACT,
 } from '../_actions/types';
-
-const initialState = {
+const initialContacts = {
   contact: '',
 };
-
-export default function (state = {}, action) {
+console.log(initialContacts.contact);
+export default function contactReducer(state = {}, action) {
   switch (action.type) {
     case CREATE_CONTACT:
       return { ...state, contact: [action.payload, ...state.contact] };
@@ -45,7 +44,7 @@ export const getUserData = (state = {}) => {
   };
 };
 
-export const getContactData = (state = initialState) => {
+export const getContactData = (state = initialContacts) => {
   return {
     ...state.contact,
   };
