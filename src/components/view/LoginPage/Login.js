@@ -15,7 +15,7 @@ const Login = ({ setAccessToken }) => {
   const handleSubmit = async e => {
     e.preventDefault();
     let loginUserData = new FormData();
-    loginUserData.append('app_name', 'canstartco');
+    loginUserData.append('app_name', 'canadastartupco');
     loginUserData.append('username', usernameRef.current.value);
     loginUserData.append('password', passwordRef.current.value);
     dispatch(loginUser(loginUserData))
