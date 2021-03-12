@@ -1,28 +1,26 @@
 import { LOGIN_USER, LOGOUT_USER } from './types';
 
 export async function loginUser(dataToSubmit) {
-  const request = await fetch(`users/login`, {
+  const response = await fetch(`users/login`, {
     method: 'POST',
     body: dataToSubmit,
   });
   return {
     type: LOGIN_USER,
-    payload: request.json(),
+    payload: response.json(),
   };
 }
 
-export async function logoutUser() {
-  const token = sessionStorage.getItem('ACCESS_TOKEN');
+export async function logoutUser(token) {
   const accessToken = 'Bearer ' + token.replace(/"/g, '');
-  const request = await fetch(`users/logout`, {
+  const response = await fetch(`users/logout`, {
     method: 'POST',
     headers: {
       Authorization: accessToken,
     },
   });
-
   return {
     type: LOGOUT_USER,
-    payload: request.json(),
+    payload: response.json(),
   };
 }

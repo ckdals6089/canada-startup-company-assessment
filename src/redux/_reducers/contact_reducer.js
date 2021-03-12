@@ -16,10 +16,11 @@ export default function contactReducer(state = initialContacts, action) {
         contacts: [action.payload, ...state.contacts],
       };
     case DELETE_CONTACT:
+      console.log(action.payload);
       return {
         ...state,
         contacts: state.contacts.filter(
-          contactData => contactData.id != action.payload.id
+          contactData => contactData.id != action.payload
         ),
       };
     case UPDATE_CONTACT:
@@ -42,9 +43,3 @@ export default function contactReducer(state = initialContacts, action) {
       return state;
   }
 }
-
-export const getUserData = (state = {}) => {
-  return {
-    ...state.user.loginSucess,
-  };
-};

@@ -4,11 +4,10 @@ import { useDispatch } from 'react-redux';
 import { logoutUser } from '../../../redux/_actions/user_actions';
 
 const NavBar = () => {
-  const IsLoggedin = sessionStorage.getItem('ACCESS_TOKEN');
+  const accessToken = sessionStorage.getItem('ACCESS_TOKEN');
   const [logintoggle, setLoginToggle] = useState(true);
-  console.log(IsLoggedin);
   useEffect(() => {
-    if (IsLoggedin === null) {
+    if (accessToken === null) {
       setLoginToggle(false);
     } else {
       setLoginToggle(true);
@@ -16,7 +15,7 @@ const NavBar = () => {
   }, []);
   const dispatch = useDispatch();
   const logoutHandler = () => {
-    dispatch(logoutUser(IsLoggedin))
+    dispatch(logoutUser(accessToken))
       .then(response => {
         if (response.status === 200) {
           alert('Log Out Success');

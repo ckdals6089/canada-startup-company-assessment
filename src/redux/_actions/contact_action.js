@@ -22,10 +22,9 @@ export async function createContact(dataToSubmit) {
 }
 
 export async function updateContact(dataToSubmit) {
-  console.log(dataToSubmit);
   const token = sessionStorage.getItem('ACCESS_TOKEN');
   const accessToken = 'Bearer ' + token.replace(/"/g, '');
-  const response = await fetch(`/contacts/update`, {
+  const response = await fetch(`/contacts/update/${dataToSubmit.id}`, {
     method: 'POST',
     headers: {
       Authorization: accessToken,
@@ -42,14 +41,14 @@ export async function deleteContact(id) {
   const token = sessionStorage.getItem('ACCESS_TOKEN');
   const accessToken = 'Bearer ' + token.replace(/"/g, '');
   const response = await fetch(`/contacts/delete/${id}`, {
-    method: 'GET',
+    method: 'POST',
     headers: {
       Authorization: accessToken,
     },
   });
   return {
     type: DELETE_CONTACT,
-    payload: response,
+    payload: id,
   };
 }
 
